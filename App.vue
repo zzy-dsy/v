@@ -1,21 +1,34 @@
+<script>
+// setup
+// 执行时机比beforecreate还要早
+// setup函数中获取不到this 
+// 数据 和 函数，需要在 setup 最后return， 才能在模板中应用
+</script>
+
 <script setup>
-import { computed,ref } from 'vue';
+// import { reactive } from 'vue';
+// const state = reactive({
+//   count: 100
+// })
+// const setCount = () =>{
+//   state.count++
+// }
 
-const list =ref( [1,2,3,4,5,6,7,8] )
+import { ref } from 'vue';
+const count =ref(0)
+console.log(count.value)
 
-const computedlist = computed(() =>{
-
-  return list.value.filter(item=> item>=2)
-})
-
-const added =() =>{
-  list.value.push(123)
+const setCount = () =>{
+  count.value++
 }
 </script>
 
 <template>
-  <div>原来的数组  ，{{list}}</div>
-  <div>修改后的数组  ，{{ computedlist }}</div>
-
-  <button @click="added">+123</button>
+  <div>{{ count }}</div>
+  <button @click="setCount">+1</button>
 </template>
+
+<!-- <template>
+  <div>{{ state.count }}</div>
+  <button @click="setCount">+1</button>
+</template> -->
